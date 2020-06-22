@@ -1,0 +1,6 @@
+---
+# tasks file for mongodb
+- name: algo para mongodb 
+  apt:
+    name: mongodb
+    state: present

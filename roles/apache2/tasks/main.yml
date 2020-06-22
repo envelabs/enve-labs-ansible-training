@@ -1,0 +1,5 @@
+---
+- name: algo para apache httpd  (state=present is optional)
+  apt:
+    name: apache2
+    state: present

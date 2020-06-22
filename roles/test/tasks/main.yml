@@ -1,0 +1,5 @@
+---
+- name: probamos un script en la target
+  shell: echo "hola desde ansible en" `hostname`
+  args:
+    executable: /bin/bash
