@@ -55,7 +55,7 @@ if a task notifies a handler, then a subsequent task in the same play fails, the
 ...
 ```
 
-#### Ansible Vault
+### Ansible Vault
 Encrypt
 ```
 ansible-vault encrypt <file-to-encrypt> --vault-password-file </path/to/vault-passwd-file>
