@@ -1,5 +1,5 @@
 # Ansible
-`ansible` is an agent less automation tool that provides support for system configuration and deployments
+`ansible` is an agentless automation tool that provides support for system configuration and deployments
 
 ### Control Machine Setup
 in order to config the control machine required to orchestrate the ansible execution, `ansible` package is required.
