@@ -8,7 +8,7 @@
       - restart ntpd
 
     - name: ensure curl is at the latest version
-      apt: pkg=curl state=latest
+      apt: pkg=curl state=latest update_cache=yes
 
     - name: ensure git is at the latest version
       apt: pkg=git state=latest
