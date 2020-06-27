@@ -36,6 +36,16 @@ Vagrant.configure("2") do |config|
   	subconfig.vm.network "forwarded_port", guest: 80, host: 80
     subconfig.vm.provision "shell",
       inline: "echo Hello, from node1"
+
+    #subconfig.vm.provision "ansible_local" do |ansible|
+      #ansible.host_key_checking = false
+      #ansible.limit = "all"
+      #ansible.config_file = 'ansible.cfg'
+      #ansible.playbook_path="./"
+      #ansible.inventory_path = "inventory"
+      #ansible.playbook = "play.webserver.yml"
+    #end
+
   end
 
   config.vm.define "node2" do |subconfig|
