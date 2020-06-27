@@ -1,0 +1,31 @@
+---
+- hosts: webservers
+  become: yes
+
+  tasks:
+    - name: install Apache server
+      apt:
+        name: apache2
+        state: latest
+
+    - name: enable and start Apache server
+      service:
+        name: apache2
+        enabled: yes
+        state: started
+
+    - name: set content directory group/permissions
+      file:
+        path: /var/www/html
+        owner: www-data
+        group: www-data
+        state: directory
+        mode: u=rwx,g=rwx,o=rx,g+s
+
+    - name: create default page content
+      copy:
+        content: "Welcome to {{ ansible_fqdn}} on {{ ansible_default_ipv4.address }}"
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: u=rw,g=rw,o=r
