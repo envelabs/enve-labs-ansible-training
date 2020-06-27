@@ -1,0 +1,10 @@
+---
+- hosts: dbservers
+  become: yes
+
+  tasks:
+    - name: install mongodb server
+      apt:
+        name: mongodb
+        state: latest
+ 
