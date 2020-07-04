@@ -24,7 +24,7 @@
 
     - name: create default page content
       copy:
-        content: "Welcome to {{ ansible_fqdn}} on {{ ansible_default_ipv4.address }}"
+        content: "Hola, welcome to {{ ansible_fqdn}} on {{ ansible_default_ipv4.address }}"
         dest: /var/www/html/index.html
         owner: www-data
         group: www-data
