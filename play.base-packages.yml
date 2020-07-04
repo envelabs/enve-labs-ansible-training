@@ -1,25 +1,5 @@
 - hosts: all
   become: yes
 
-  tasks:
-    - name: ensure ntpd is at the latest version
-      apt: pkg=ntp state=latest
-      notify:
-      - restart ntpd
-
-    - name: ensure curl is at the latest version
-      apt: pkg=curl state=latest update_cache=yes
-
-    - name: ensure git is at the latest version
-      apt: pkg=git state=latest
-
-    - name: ensure jq is at the latest version
-      apt: pkg=jq state=latest
-
-  handlers:
-    - name: restart ntpd
-      service: name=ntp state=restarted
-
-  #roles:
-  #  - { role: apache2 }
-  #  - { role: mongodb }
+  roles:
+    - { role: base-packages }
