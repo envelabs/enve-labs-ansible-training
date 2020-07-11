@@ -1,0 +1,27 @@
+---
+# tasks file for postgres
+- name: instalando postgres
+  apt:
+    name: postgresql
+    state: present
+
+- name: copy hba conf file
+  copy:
+    src: pg_hba.conf
+    dest: /etc/postgresql/10/main
+    owner: postgres
+    group: postgres
+    mode: '0640'
+
+- name: search and replace for postgres.sql
+  replace:
+    path: /etc/postgresql/10/main/postgresql.conf
+    regexp: '^#listen_addresses = (.+)$'
+    replace: "listen_addresses = '*'"
+    mode: '0640'
+
+- name: enable and start postgres server
+  service:
+    name: postgresql
+    enabled: yes
+    state: restarted
