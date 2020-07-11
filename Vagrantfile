@@ -37,14 +37,11 @@ Vagrant.configure("2") do |config|
     subconfig.vm.provision "shell",
       inline: "echo Hello, from node1"
 
-    #subconfig.vm.provision "ansible_local" do |ansible|
-      #ansible.host_key_checking = false
-      #ansible.limit = "all"
-      #ansible.config_file = 'ansible.cfg'
-      #ansible.playbook_path="./"
-      #ansible.inventory_path = "inventory"
-      #ansible.playbook = "play.webserver.yml"
-    #end
+    subconfig.vm.provision "ansible_local" do |ansible|
+      ansible.config_file = 'ansible.cfg'
+      ansible.inventory_path = "inventory"
+      ansible.playbook = "play.webserver.yml"
+    end
 
   end
 
@@ -60,13 +57,11 @@ Vagrant.configure("2") do |config|
   	subconfig.vm.network "forwarded_port", guest: 27017, host: 27017
     subconfig.vm.provision "shell",
       inline: "echo Hello, from node2"
-    #subconfig.vm.provision "ansible_local" do |ansible|
-      #ansible.host_key_checking = false
-      #ansible.limit = "all"
-      #ansible.config_file = 'ansible.cfg'
-      #ansible.inventory_path = "inventory"
-      #ansible.playbook = "playbook.yml"
-    # end
+    subconfig.vm.provision "ansible_local" do |ansible|
+      ansible.config_file = 'ansible.cfg'
+      ansible.inventory_path = "inventory"
+      ansible.playbook = "play.dbserver.yml"
+    end
   end
 
 end
