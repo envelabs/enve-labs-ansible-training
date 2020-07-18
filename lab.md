@@ -187,6 +187,13 @@ A role, can be referenced inside of a playbook in the following way
     - common
 ```
 
+### Packer build
+How to export env variables for AWS api interaction
+```
+export AWS_ACCESS_KEY_ID=<access-key>
+export AWS_SECRET_ACCESS_KEY=<secret-access-key>
+```
+
 ### SSH keys
 generate SSH private/public keys from `master`, in order to be added to  `node1` and `node2` under `/home/vagrant/.ssh/authorized_keys`
 ```
