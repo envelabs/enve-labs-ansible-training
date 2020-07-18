@@ -1,0 +1,13 @@
+---
+# tasks file for mysql
+- name: install mysql server
+  apt:
+    name: mysql-server
+    state: latest
+
+- name: copy mysql conf server file
+  copy:
+    src: mysqld.cnf
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    
+

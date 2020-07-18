@@ -2,4 +2,4 @@
   become: yes
 
   roles:
-    - mongodb
+  - mongodb

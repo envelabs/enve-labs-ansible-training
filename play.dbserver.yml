@@ -5,3 +5,4 @@
   roles:
     - { role: mongodb }
     - { role: postgres }
+    - { role: mysql }
