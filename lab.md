@@ -166,13 +166,29 @@ node1 | CHANGED => {
 }
 ```
 ### Ansible `playbooks` execution
-[to be added]
+Playbooks are the process definition in order to configure and orchestrate deployments. It is the `language` that Ansible interprets in order to execute several tasks
+```
+ansible-playbook -i <inventory> <playbook-file.yml>
+```
 
 ### Ansible `roles`
-[to be added]
+Roles are reusable playbooks that help us to group tasks by functionality.</br>
+Roles can be generated using the `ansible-galaxy` command
+```
+ansible-galaxy init <role-name>
+```
+
+A role, can be referenced inside of a playbook in the following way
+```
+- hosts: all
+  become: yes
+
+  roles:
+    - common
+```
 
 ### SSH keys
 generate SSH private/public keys from `master`, in order to be added to  `node1` and `node2` under `/home/vagrant/.ssh/authorized_keys`
 ```
-	ssh-keygen -t rsa
+ssh-keygen -t rsa
 ```
