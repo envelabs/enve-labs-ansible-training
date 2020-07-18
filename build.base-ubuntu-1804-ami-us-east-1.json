@@ -1,0 +1,80 @@
+{
+  "variables": {
+    "base_name": "base-ubuntu-1804-ami-us-east-1",
+    "aws_region": "us-east-1",
+    "vpc_id": "vpc-64378801",
+    "aws_source_ami": "ami-0ac80df6eff0e70b5",
+    "aws_instance_type": "t2.micro",
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "root_dir": "/root",
+    "tmp_dir": "/tmp",
+    "playbook_file": "play.common.yml"
+  },
+  "builders":[
+  {
+    "type": "amazon-ebs",
+    "communicator": "ssh",
+    "ssh_pty": "true",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "{{user `aws_region`}}",
+    "source_ami": "{{user `aws_source_ami`}}",
+    "instance_type": "{{user `aws_instance_type`}}",
+    "ami_virtualization_type": "hvm",
+    "ssh_username": "ubuntu",
+    "ami_name": "{{user `base_name`}}-{{isotime \"06-01-02-03_04_05\"}}",
+    "tags": {
+      "role": "base-image"
+    }, 
+    "launch_block_device_mappings": [
+      {
+        "delete_on_termination": "true",
+        "device_name": "/dev/sdf",
+        "volume_type": "gp2",
+        "volume_size": 10
+      }
+    ]
+  }
+  ],
+  "provisioners":[
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'mounting /opt volume'",
+        "sudo mkfs -t ext4 /dev/xvdf",
+        "sudo mount /dev/xvdf /opt",
+        "sudo bash -c \"echo '/dev/xvdf /opt/ ext4 defaults,nofail 0 2' >> /etc/fstab\""
+      ]
+    }
+    ,
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'installing packages'",
+        "sudo apt-get -y update",
+        "sudo apt-get install -y software-properties-common",
+        "sudo apt-add-repository -y ppa:ansible/ansible",
+        "sudo apt-get -y update",
+        "sudo apt-get install -y sudo wget --allow-unauthenticated",
+        "sudo apt-get install -y python --allow-unauthenticated",
+        "sudo apt-get install -y ansible --allow-unauthenticated"
+      ]
+    }
+    ,
+    {
+      "type": "ansible-local",
+      "staging_directory": "{{user `tmp_dir`}}/ansible",
+      "playbook_dir": "{{user `playbook_dir`}}",
+      "playbook_file": "{{user `playbook_file`}}"
+    }
+    ,
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'finishing build process =)'"
+      ]
+    }
+  ]
+}
+
