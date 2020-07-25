@@ -9,6 +9,7 @@
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "root_dir": "/root",
     "tmp_dir": "/tmp",
+    "playbook_dir": "./",
     "playbook_file": "play.common.yml"
   },
   "builders":[
@@ -26,7 +27,7 @@
     "ami_name": "{{user `base_name`}}-{{isotime \"06-01-02-03_04_05\"}}",
     "tags": {
       "role": "base-image"
-    }, 
+    },
     "launch_block_device_mappings": [
       {
         "delete_on_termination": "true",
@@ -51,14 +52,14 @@
     {
       "type": "shell",
       "inline": [
-        "echo 'installing packages'",
-        "sudo apt-get -y update",
-        "sudo apt-get install -y software-properties-common",
+        "echo 'installing ansible packages'",
+        "sudo apt -y update",
+        "sudo apt install -y software-properties-common",
         "sudo apt-add-repository -y ppa:ansible/ansible",
-        "sudo apt-get -y update",
-        "sudo apt-get install -y sudo wget --allow-unauthenticated",
-        "sudo apt-get install -y python --allow-unauthenticated",
-        "sudo apt-get install -y ansible --allow-unauthenticated"
+        "sudo apt -y update",
+        "sudo apt install -y sudo wget --allow-unauthenticated",
+        "sudo apt install -y python --allow-unauthenticated",
+        "sudo apt install -y ansible --allow-unauthenticated"
       ]
     }
     ,
@@ -77,4 +78,3 @@
     }
   ]
 }
-
