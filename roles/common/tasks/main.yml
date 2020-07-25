@@ -5,23 +5,27 @@
   apt: pkg=ntp state=latest
 
 - name: ensure that ntpd is running
-  service: 
-    name: ntp 
+  service:
+    name: ntp
     state: started
 
 - name: ensure curl is at the latest version
-  apt: 
-    pkg: curl 
-    state: latest 
+  apt:
+    pkg: curl
+    state: latest
     update_cache: yes
 
 - name: ensure git is at the latest version
-  apt: 
-    pkg: git 
+  apt:
+    pkg: git
     state: latest
 
 - name: ensure jq is at the latest version
-  apt: 
-    pkg: jq 
+  apt:
+    pkg: jq
     state: latest
 
+- name: ensure nmap is at the latest version
+  apt:
+    pkg: nmap 
+    state: latest
