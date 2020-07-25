@@ -1,4 +1,6 @@
-- hosts: all
+---
+- name: install common packages
+  hosts: all
   become: yes
 
   roles:
