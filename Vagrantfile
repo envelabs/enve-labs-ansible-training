@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     subconfig.vm.provision "shell",
       inline: "echo Hello, from master"
 
-		config.vm.provision "shell", inline: <<-SHELL
+		subconfig.vm.provision "shell", inline: <<-SHELL
 		sudo apt -y update
 		sudo apt install -y software-properties-common
 		sudo apt-add-repository -y ppa:ansible/ansible
