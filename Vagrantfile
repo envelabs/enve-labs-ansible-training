@@ -11,6 +11,8 @@ Vagrant.configure("2") do |config|
     	vb.name = "master"
   	end
 
+    subconfig.vm.synced_folder "./", "/home/vagrant/enve-labs-ansible-training"
+
   	subconfig.vm.network :public_network, bridge: 'en0: Wi-Fi (AirPort)'
     subconfig.vm.provision "shell",
       inline: "echo Hello, from master"
